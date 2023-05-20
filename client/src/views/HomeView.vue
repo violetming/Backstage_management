@@ -7,9 +7,10 @@
       >
         <el-menu
           router
+          active-text-color="#2f3542"
           :default-active="$route.path"
-          background-color="#345"
-          text-color="#bbb"
+          background-color="#747d8c"
+          text-color="#dfe4ea"
           :style="{ height: '100vh' }"
           :collapse="isCollapse"
           class="el-menu-vertical-demo"
