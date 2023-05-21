@@ -1,113 +1,92 @@
 <template>
   <a-layout>
-    <a-layout-header class="header">
-      <div class="logo" />
-      <a-menu
-        v-model:selectedKeys="selectedKeys1"
-        theme="dark"
-        mode="horizontal"
-        :style="{ lineHeight: '64px' }"
-      >
-        <a-menu-item key="1">nav 1</a-menu-item>
-        <a-menu-item key="2">nav 2</a-menu-item>
-        <a-menu-item key="3">nav 3</a-menu-item>
-      </a-menu>
-    </a-layout-header>
+    <!-- 左边菜单栏 -->
+    <a-layout-sider theme="light">
+  <div>
+    <div style="margin: 0 20px;">
+      <img width="64" src="../assets/logo.svg" alt="">
+    <span style="font-size: 20px;">
+      后台管理
+    </span>
+    </div>
+    <a-menu
+    mode="inline"
+    router
+    >
+    <a-menu-item>首页</a-menu-item>
+      <a-sub-menu>
+        <template #icon>
+          <user-outlined />
+        </template>
+        <template #title>人才</template>
+        <a-menu-item key="1">人才管理</a-menu-item>
+        <a-menu-item key="2">人才简历</a-menu-item>
+        <a-menu-item key="3">简历详情</a-menu-item>
+      </a-sub-menu>
+      <a-sub-menu>
+        <template #icon></template>
+        <template #title>
+          <AppstoreOutlined />
+          企业
+        </template>
+        <a-menu-item key="5">企业管理列表</a-menu-item>
+        <a-menu-item key="6">企业信息</a-menu-item>
+      </a-sub-menu>
+      <a-sub-menu>
+        <template #icon>
+          <SettingOutlined />
+        </template>
+        <template #title>权限</template>
+        <a-menu-item key="9">权限列表</a-menu-item>
+        <a-menu-item key="10">Option 10</a-menu-item>
+        <a-menu-item key="11">Option 11</a-menu-item>
+        <a-menu-item key="12">Option 12</a-menu-item>
+      </a-sub-menu>
+      <a-sub-menu>
+        <template #icon>
+          <SettingOutlined />
+        </template>
+        <template #title>账号</template>
+        <a-menu-item key="9">账号详情</a-menu-item>
+        <a-menu-item key="10">修改账号信息</a-menu-item>
+        <a-menu-item key="11">修改密码</a-menu-item>
+        <a-menu-item key="12">Option 12</a-menu-item>
+      </a-sub-menu>
+    </a-menu>
+  </div>
+    </a-layout-sider>
     <a-layout>
-      <a-layout-sider width="200" style="background: #fff">
-        <a-menu
-          v-model:selectedKeys="selectedKeys2"
-          v-model:openKeys="openKeys"
-          mode="inline"
-          :style="{ height: '100%', borderRight: 0 }"
-        >
-          <a-sub-menu key="sub1">
-            <template #title>
-              <span>
-                <user-outlined />
-                subnav 1
-              </span>
-            </template>
-            <a-menu-item key="1">option1</a-menu-item>
-            <a-menu-item key="2">option2</a-menu-item>
-            <a-menu-item key="3">option3</a-menu-item>
-            <a-menu-item key="4">option4</a-menu-item>
-          </a-sub-menu>
-          <a-sub-menu key="sub2">
-            <template #title>
-              <span>
-                <laptop-outlined />
-                subnav 2
-              </span>
-            </template>
-            <a-menu-item key="5">option5</a-menu-item>
-            <a-menu-item key="6">option6</a-menu-item>
-            <a-menu-item key="7">option7</a-menu-item>
-            <a-menu-item key="8">option8</a-menu-item>
-          </a-sub-menu>
-          <a-sub-menu key="sub3">
-            <template #title>
-              <span>
-                <notification-outlined />
-                subnav 3
-              </span>
-            </template>
-            <a-menu-item key="9">option9</a-menu-item>
-            <a-menu-item key="10">option10</a-menu-item>
-            <a-menu-item key="11">option11</a-menu-item>
-            <a-menu-item key="12">option12</a-menu-item>
-          </a-sub-menu>
-        </a-menu>
-      </a-layout-sider>
-      <a-layout style="padding: 0 24px 24px">
-        <a-breadcrumb style="margin: 16px 0">
-          <a-breadcrumb-item>Home</a-breadcrumb-item>
-          <a-breadcrumb-item>List</a-breadcrumb-item>
-          <a-breadcrumb-item>App</a-breadcrumb-item>
-        </a-breadcrumb>
-        <a-layout-content
-          :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
-        >
-          Content
-        </a-layout-content>
-      </a-layout>
+      <!-- 顶部区域 -->
+      <a-layout-header
+      style="background-color: antiquewhite;"
+      >
+        <span>用户名</span>
+        <span>账号</span>
+        <span>头像</span>
+      </a-layout-header>
+
+      <!-- 内容区域 -->
+      <a-layout-content>
+
+        <router-view></router-view>
+
+      </a-layout-content>
     </a-layout>
   </a-layout>
 </template>
-<script>
-import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  components: {
-    UserOutlined,
-    LaptopOutlined,
-    NotificationOutlined,
-  },
-  setup() {
-    return {
-      selectedKeys1: ref(['2']),
-      selectedKeys2: ref(['1']),
-      collapsed: ref(false),
-      openKeys: ref(['sub1']),
-    };
-  },
-});
+
+<script setup>
+
+import {AppstoreOutlined, SettingOutlined,UserOutlined } from '@ant-design/icons-vue';  /* 这几个映入是图标 */
+
 </script>
+
 <style>
-#components-layout-demo-top-side-2 .logo {
-  float: left;
-  width: 120px;
-  height: 31px;
-  margin: 16px 24px 16px 0;
-  background: rgba(255, 255, 255, 0.3);
+.ant-layout-sider-children{
+  height: 100vh;
+}
+.ant-layout-header{
+  text-align: end;
 }
 
-.ant-row-rtl #components-layout-demo-top-side-2 .logo {
-  float: right;
-  margin: 16px 0 16px 24px;
-}
-
-.site-layout-background {
-  background: #fff;
-}
 </style>
