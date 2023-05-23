@@ -9,11 +9,23 @@ const routes = [
     path: '/home',
     name: 'home',
     component:()=>import('../views/HomeView.vue'),
-    children:[{
+    children:[
+      {
       path:'index',
       name:'/home/index',
       component:()=>import('../views/Index.vue')
-    }]
+    },
+    {
+      path:'resumelist',
+      name:'/home/resumelist',
+      component:()=>import('../views/Resume/ResumeList.vue')
+    },
+    {
+      path:'resumeadd',
+      name:'/home/resumeadd',
+      component:()=>import('../views/Resume/ResumeAdd.vue')
+    }
+  ]
   },
 ] 
 

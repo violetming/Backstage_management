@@ -67,6 +67,14 @@
 
       <!-- 内容区域 -->
       <a-layout-content>
+        <a-breadcrumb>
+          <a-breadcrumb-item>Home</a-breadcrumb-item>
+          <a-breadcrumb-item><a href="">Application Center</a></a-breadcrumb-item>
+          <a-breadcrumb-item><a href="">Application List</a></a-breadcrumb-item>
+          <a-breadcrumb-item>An Application</a-breadcrumb-item>
+        </a-breadcrumb>
+
+        <a-divider></a-divider>
 
         <router-view></router-view>
 
@@ -87,6 +95,12 @@ import {AppstoreOutlined, SettingOutlined,UserOutlined } from '@ant-design/icons
 }
 .ant-layout-header{
   text-align: end;
+}
+.ant-breadcrumb{
+  padding-top: 10px;
+}
+.ant-divider{
+  margin: 10px 0;
 }
 
 </style>

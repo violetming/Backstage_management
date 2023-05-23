@@ -1,5 +1,7 @@
 // 引入express模块
 const express=require('express')
+// 创建服务
+const app=express()
 
 // 引入路由
 const resume=require('./router/Resume')
@@ -11,9 +13,14 @@ const others=require('./router/Others')
 
 
 
+// 配置跨域
+const cors = require("cors");
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
-// 创建服务
-const app=express()
 
 // 解析post请求参数
 app.use(express.urlencoded());
@@ -58,6 +65,7 @@ app.get('/',(req,res)=>{
   res.send('小黑子还来')
 })
 
+
 app.use('/resume',resume)
 app.use('/positions',positions)
 app.use('/user',user)
@@ -65,13 +73,5 @@ app.use('/qualification',qualification)
 app.use('/enterprise',enterprise)
 app.use('/others',others)
 
-
-// 配置跨域
-const cors = require("cors");
-app.use(
-  cors({
-    origin: "*",
-  })
-);
 
 
