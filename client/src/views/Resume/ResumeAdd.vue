@@ -1,11 +1,13 @@
 <template>
   <div>
-    <h1>这是人才简历新增页面</h1>
+    这是添加人才
   </div>
 </template>
 
-<script setup>
-
+<script>
+  export default {
+    
+  }
 </script>
 
 <style lang="scss" scoped>

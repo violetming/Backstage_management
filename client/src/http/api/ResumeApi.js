@@ -17,6 +17,11 @@ const resueApi={
   queryname(params){
     let url=BMDURL+'/resume/queryname'
     return myaxios.post(url,params)
+  },
+  /* 通过id删除人才 */
+  del(params){
+    let url =BMDURL='/resume/del'
+    return myaxios.post(url,params)
   }
 
 

@@ -1,108 +1,133 @@
 <template>
-  <a-layout>
-    <!-- 左边菜单栏 -->
-    <a-layout-sider theme="light">
   <div>
-    <div style="margin: 0 20px;">
-      <img width="64" src="../assets/logo.svg" alt="">
-    <span style="font-size: 20px;">
-      后台管理
-    </span>
-    </div>
-    <a-menu
-    mode="inline"
-    router
-    >
-    <a-menu-item @click="router.push('/home/index')">首页</a-menu-item>
-      <a-sub-menu>
-        <template #icon>
-          <user-outlined />
-        </template>
-        <template #title>人才</template>
-        <a-menu-item @click="router.push('/home/resumelist')" key="1">人才管理</a-menu-item>
-        <a-menu-item @click="router.push('/home/resumeadd')" key="2">人才简历</a-menu-item>
-        <a-menu-item key="3">简历详情</a-menu-item>
-      </a-sub-menu>
-      <a-sub-menu>
-        <template #icon></template>
-        <template #title>
-          <AppstoreOutlined />
-          企业
-        </template>
-        <a-menu-item key="5">企业管理列表</a-menu-item>
-        <a-menu-item key="6">企业信息</a-menu-item>
-      </a-sub-menu>
-      <a-sub-menu>
-        <template #icon>
-          <SettingOutlined />
-        </template>
-        <template #title>权限</template>
-        <a-menu-item key="9">权限列表</a-menu-item>
-        <a-menu-item key="10">Option 10</a-menu-item>
-        <a-menu-item key="11">Option 11</a-menu-item>
-        <a-menu-item key="12">Option 12</a-menu-item>
-      </a-sub-menu>
-      <a-sub-menu>
-        <template #icon>
-          <SettingOutlined />
-        </template>
-        <template #title>账号</template>
-        <a-menu-item key="9">账号详情</a-menu-item>
-        <a-menu-item key="10">修改账号信息</a-menu-item>
-        <a-menu-item key="11">修改密码</a-menu-item>
-        <a-menu-item key="12">Option 12</a-menu-item>
-      </a-sub-menu>
-    </a-menu>
-  </div>
-    </a-layout-sider>
-    <a-layout>
-      <!-- 顶部区域 -->
-      <a-layout-header
-      style="background-color: antiquewhite;"
+    <el-container>
+      <el-aside 
+      class="aside"
+      style="width:200px"
       >
-        <span>用户名</span>
-        <span>账号</span>
-        <span>头像</span>
-      </a-layout-header>
+        <el-menu 
+        router
+        default-active="2" 
+        :style="{ height: '100vh' }"
+        class="el-menu-vertical-demo">
+          <el-menu-item class="menuitem-top">
+            <img width="30px" src="../assets/logo.svg" alt="" />
+            <template slot="title">
+              <span style="font-size: 1.2em; color:#636e72; font-weight: bold">
+                &nbsp;招聘</span>
+            </template>
+          </el-menu-item>
+          <el-menu-item index="/home/index">
+            <i class="el-icon-message"></i>
+            <template slot="title"> 首页 </template>
+          </el-menu-item>
 
-      <!-- 内容区域 -->
-      <a-layout-content>
-        <a-breadcrumb>
-          <a-breadcrumb-item>Home</a-breadcrumb-item>
-          <a-breadcrumb-item><a href="">Application Center</a></a-breadcrumb-item>
-          <a-breadcrumb-item><a href="">Application List</a></a-breadcrumb-item>
-          <a-breadcrumb-item>An Application</a-breadcrumb-item>
-        </a-breadcrumb>
+          <el-submenu index="1">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span slot="title">人才管理</span>
+            </template>
+            <el-menu-item index="/home/resumelist">
+              <i class="el-icon-notebook-2"></i>
+              <span slot="title">人才列表</span>
+            </el-menu-item>
+            <el-menu-item index="/home/resumeadd">
+              <i class="el-icon-plus"></i>
+              <span slot="title">新增人才</span>
+            </el-menu-item>
+            <el-menu-item index="/home/resumeupdate">
+              <i class="el-icon-plus"></i>
+              <span slot="title">新增人才</span>
+            </el-menu-item>
+          </el-submenu>
 
-        <a-divider></a-divider>
+<!--           <el-submenu index="3">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span slot="title">企业管理</span>
+            </template>
+            <el-menu-item index="/home/movie-list">
+              <i class="el-icon-notebook-2"></i>
+              <span slot="title">企业列表</span>
+            </el-menu-item>
+            <el-menu-item index="/home/movie-add">
+              <i class="el-icon-plus"></i>
+              <span slot="title">企业信息</span>
+            </el-menu-item>
+            <el-menu-item index="/home/movie-add">
+              <i class="el-icon-plus"></i>
+              <span slot="title">新增企业</span>
+            </el-menu-item>
+          </el-submenu> -->
 
-        <router-view></router-view>
+<!-- 
+          <el-submenu index="4">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span slot="title">电影院管理</span>
+            </template>
+            <el-menu-item index="/home/cinema-list">
+              <i class="el-icon-notebook-2"></i>
+              <span slot="title">电影院列表</span>
+            </el-menu-item>
+            <el-menu-item index="/home/cinema-add">
+              <i class="el-icon-plus"></i>
+              <span slot="title">新增电影院</span>
+            </el-menu-item>
+          </el-submenu> -->
 
-      </a-layout-content>
-    </a-layout>
-  </a-layout>
+        </el-menu>
+      </el-aside>
+      <el-container>
+        <el-header class="header">
+          <el-breadcrumb separator-class="el-icon-arrow-right">
+            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+            <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+            <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+          </el-breadcrumb>
+          <span>未登录</span>
+        </el-header>
+        <el-main>
+
+          <!-- 二级路由占位符 -->
+          <router-view/>
+        </el-main>
+      </el-container>
+    </el-container>
+  </div>
 </template>
 
-<script setup>
+<script>
+export default {
+  data() {
+    return {
+      
+    };
+  },
+  methods: {
 
-import {AppstoreOutlined, SettingOutlined,UserOutlined } from '@ant-design/icons-vue';  /* 这几个映入是图标 */
-import {useRouter} from 'vue-router' 
-let router =useRouter()  //经行路由管理 跳转
-
+  },
+};
 </script>
 
 <style>
-.ant-layout-sider-children{
-  height: 100vh;
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
 }
-.ant-layout-header{
-  text-align: end;
+.menuitem-top{
+  margin: 0 30px;
 }
-.ant-breadcrumb{
-  padding-top: 10px;
+.aside{
+  box-shadow: 1px 0 3px 2px  #ccc;
+  margin-right: 5px;
 }
-.ant-divider{
-  margin: 10px 0;
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  box-shadow: 1px 0 3px 2px  #ccc;
 }
-
 </style>

@@ -1,4 +1,4 @@
-# antd-demo
+# client
 
 ## Project setup
 ```
