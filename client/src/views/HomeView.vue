@@ -13,14 +13,14 @@
     mode="inline"
     router
     >
-    <a-menu-item>首页</a-menu-item>
+    <a-menu-item @click="router.push('/home/index')">首页</a-menu-item>
       <a-sub-menu>
         <template #icon>
           <user-outlined />
         </template>
         <template #title>人才</template>
-        <a-menu-item key="1">人才管理</a-menu-item>
-        <a-menu-item key="2">人才简历</a-menu-item>
+        <a-menu-item @click="router.push('/home/resumelist')" key="1">人才管理</a-menu-item>
+        <a-menu-item @click="router.push('/home/resumeadd')" key="2">人才简历</a-menu-item>
         <a-menu-item key="3">简历详情</a-menu-item>
       </a-sub-menu>
       <a-sub-menu>
@@ -86,6 +86,8 @@
 <script setup>
 
 import {AppstoreOutlined, SettingOutlined,UserOutlined } from '@ant-design/icons-vue';  /* 这几个映入是图标 */
+import {useRouter} from 'vue-router' 
+let router =useRouter()  //经行路由管理 跳转
 
 </script>
 

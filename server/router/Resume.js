@@ -222,19 +222,18 @@ router.post('/queryphone',(req,res)=>{
  * @return
  * {code:200,msg:'ok',data:[{}]}
  */
-router.post('/queryexperience', (req, res) => {
-  let {  min, max } = req.body
+router.post('/queryname', (req, res) => {
+  let {name} = req.body
   let schema = Joi.object({
-    min: Joi.number().required(),
-    max: Joi.number().required()
+    name: Joi.string().required()
   })
   let { error, value } = schema.validate(req.body);
   if (error) {
     res.send(Response.error(400, error))
     return;
   }
-  let sql = `SELECT * FROM resume WHERE experience >= ? AND experience <= ?`
-  pool.query(sql, [min, max], (error, result) => {
+  let sql = `SELECT * FROM resume WHERE name = ? `
+  pool.query(sql, [name], (error, result) => {
     if (error) {
       res.send(Response.error(500, error))
       throw error
