@@ -20,7 +20,12 @@ const resueApi={
   },
   /* 通过id删除人才 */
   del(params){
-    let url =BMDURL='/resume/del'
+    let url =BMDURL+'/resume/del'
+    return myaxios.post(url,params)
+  },
+  /* 新建人才 */
+  add(params){
+    let url=BMDURL+'/resume/add'
     return myaxios.post(url,params)
   }
 

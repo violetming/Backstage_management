@@ -35,10 +35,6 @@
               <i class="el-icon-plus"></i>
               <span slot="title">新增人才</span>
             </el-menu-item>
-            <el-menu-item index="/home/resumeupdate">
-              <i class="el-icon-plus"></i>
-              <span slot="title">新增人才</span>
-            </el-menu-item>
           </el-submenu>
 
 <!--           <el-submenu index="3">

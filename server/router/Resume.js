@@ -16,9 +16,8 @@ const Response=require('../utils/Response.js')
  * {code:200,msg:'ok',data:[{}]}
  */
 router.post('/add',(req,res)=>{
-  let {id,name,sex,irthday,major,education,experience,native,post,monthly,through,phone,email}=req.body;
+  let {name,sex,irthday,major,education,experience,native,post,monthly,through,phone,email}=req.body;
   let schema=Joi.object({
-    id:Joi.string().required(),
     name:Joi.string().required(),
     sex:Joi.string().required(),
     irthday:Joi.date().required(),
@@ -30,14 +29,13 @@ router.post('/add',(req,res)=>{
     monthly:Joi.string().required(),
     through:Joi.string().required(),
     phone:Joi.number().required(),
-    email:Joi.string().required(),
+    email:Joi.string().required()
   })
   let{error,value}=schema.validate(req.body);
   if(error){
     res.send(Response.error(400,error))
   }
   let sql=`insert into resume(
-    id,
     name,
     sex,
     irthday,
@@ -50,9 +48,9 @@ router.post('/add',(req,res)=>{
     through,
     phone,
     email
-  )values(?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+  )values(?,?,?,?,?,?,?,?,?,?,?,?)`;
       // 调用 mysql 连接池 query 方法执行查询操作
-  pool.query(sql,[id,name,sex,irthday,major,education,experience,native,post,monthly,through,phone,email],(error,result)=>{
+  pool.query(sql,[name,sex,irthday,major,education,experience,native,post,monthly,through,phone,email],(error,result)=>{
       if(error){
         res.send(Response.error(500,error));
         throw error;
