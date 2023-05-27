@@ -167,24 +167,28 @@ router.get('/queryall',(req,res)=>{
  * @return
  * {code:200,msg:'ok',data:[{}]}
  */
-router.post('/queryid',(req,res)=>{
-  let {id}=req.body
+router.get('/queryid',(req,res)=>{
+  let {id}=req.query
   let schema=Joi.object({
     id:Joi.string().required()
   })
-  let{error,value}=schema.validate(req.body);
+  let{error,value}=schema.validate(req.query);
   if(error){
     res.send(Response.error(400,error))
   }
   let sql=`select * from resume where id=?`
   pool.query(sql,[id],(error,result)=>{
-    if(error){
-      res.send(Response.error(500,error))
-      throw error
+    if (error) {
+      res.send(Response.error(500, error));
+      throw error;
     }
-    res.send(Response.ok(result))
+    if (result && result.length == 0) {
+      // 没查到
+      res.send(Response.ok(null));
+    } else {
+      res.send(Response.ok(result[0]));
+    }
   })
-  
 })
 
 /**

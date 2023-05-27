@@ -29,9 +29,9 @@ const routes = [
       component:()=>import('../views/Resume/ResumeAdd.vue')
     },
     {
-      path:'resumeupdate',
-      name:'/home/resumeupdate',
-      component:()=>import('../views/Resume/ResumeAdd.vue')
+      path:'resumeupdate/:id',
+      name:'/home/resumeupdate/id',
+      component:()=>import('../views/Resume/ResumeUpdate.vue')
     }
   ]
   },

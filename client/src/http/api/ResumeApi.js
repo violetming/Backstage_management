@@ -27,8 +27,17 @@ const resueApi={
   add(params){
     let url=BMDURL+'/resume/add'
     return myaxios.post(url,params)
+  },
+  /* 通过id查询人才 */
+  queryid(params){
+    let url=BMDURL+'/resume/queryid'
+    return myaxios.get(url,params)
+  },
+  /* 修改人才表 */
+  update(params){
+    let url=BMDURL+'/resume/update'
+    return myaxios.post(url,params)
   }
-
 
 }
 export default resueApi

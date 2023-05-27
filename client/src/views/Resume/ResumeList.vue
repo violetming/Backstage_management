@@ -20,6 +20,15 @@
         prop='name'
         label="姓名">
         </el-table-column>
+
+        <el-table-column
+        width="50px"
+        prop='sex'
+        label="性别">
+          <template slot-scope="scope">
+            {{getSex(scope.row.sex)}}
+          </template>
+        </el-table-column>
         
         <el-table-column
          width="150px"
@@ -40,16 +49,20 @@
         </el-table-column>
         
         <el-table-column
+        width="150px"
         prop="post"
         label="求职岗位">
         </el-table-column>
         
         <el-table-column
+        width="200px"
         prop="email"
         label="邮箱">
         </el-table-column>
 
-        <el-table-column label="操作">
+        <el-table-column 
+
+        label="操作">
           <template slot-scope="scope">
             <el-button
               size="mini"
@@ -96,16 +109,46 @@ import httpApi from '@/http';
       },
       enablement(){
         httpApi.resumApi.queryall().then(res=>{
-          console.log(res.data.data);
+/*           console.log(res.data.data); */
           this.tableData=res.data.data
         })
       },
+      // 编辑按钮
         handleEdit(row) {
-        console.log(row);
+        this.$router.push(`/home/resumeupdate/${row}`) 
+      },
+      // 删除按钮
+      handleDelete(row) {
+        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+          httpApi.resumApi.del({id:row}).then(res=>{
+           if(res.data.code==200){ 
+               this.enablement()
+            }else {
+              this.$message({
+                message: '删除失败',
+                type: 'error'
+              })
+              // this.$refs['form'].resetFields()
+            }
+        })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });          
+        });
 
       },
-      handleDelete(row) {
-        console.log(row);
+      getSex(val){
+        return val===1?'男':'女'
       }
     },
     // 生命周期函数
