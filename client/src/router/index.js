@@ -16,24 +16,41 @@ const routes = [
       {
       path:'index',
       name:'/home/index',
-      component:()=>import('../views/Index.vue')
+      component:()=>import('../views/Index.vue'),
+      meta:{
+        breadcrumbs:['首页']
+      }
     },
     {
       path:'resumelist',
       name:'/home/resumelist',
-      component:()=>import('../views/Resume/ResumeList.vue')
+      component:()=>import('../views/Resume/ResumeList.vue'),
+      meta:{
+        breadcrumbs:['首页','人才管理','人才列表']
+      }
     },
     {
       path:'resumeadd',
       name:'/home/resumeadd',
-      component:()=>import('../views/Resume/ResumeAdd.vue')
+      component:()=>import('../views/Resume/ResumeAdd.vue'),
+      meta:{
+        breadcrumbs:['首页','人才管理','新增人才']
+      }
     },
     {
       path:'resumeupdate/:id',
       name:'/home/resumeupdate/id',
-      component:()=>import('../views/Resume/ResumeUpdate.vue')
+      component:()=>import('../views/Resume/ResumeUpdate.vue'),
+      meta:{
+        breadcrumbs:['首页','人才管理','修改人才']
+      }
     }
   ]
+  },
+  {
+    path: '/login',
+    name: '/login',
+    component: () => import('../views/user/Login.vue'),
   },
 ]
 
@@ -42,5 +59,7 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+
 
 export default router

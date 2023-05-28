@@ -1,13 +1,14 @@
 <template>
-  <div>
-    <el-container>
+  <div >
+    <el-container
+    >
       <el-aside 
       class="aside"
       style="width:200px"
       >
         <el-menu 
         router
-        default-active="2" 
+        :default-active="$route.path" 
         :style="{ height: '100vh' }"
         class="el-menu-vertical-demo">
           <el-menu-item class="menuitem-top">
@@ -77,10 +78,11 @@
       <el-container>
         <el-header class="header">
           <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-            <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-            <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+            <el-breadcrumb-item 
+            v-for="item in $route.meta.breadcrumbs" :key="item"
+            >
+            {{item}}
+            </el-breadcrumb-item>
           </el-breadcrumb>
           <span>未登录</span>
         </el-header>
@@ -110,6 +112,13 @@ export default {
 <style>
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
+  min-height: 400px;
+}
+.aside::-webkit-scrollbar {
+  display: none;
+}
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 240px;
   min-height: 400px;
 }
 .menuitem-top{

@@ -16,7 +16,7 @@ const SECRET_KEY = 'JWT_SECRET_KEY'
 router.post("/login", (req, resp)=>{
   let{username, password} = req.body
   // 表单验证
-  let schema = Joi.object({
+/*   let schema = Joi.object({
     username: Joi.string().required().pattern(new RegExp('^\\w{2,15}$')), // 必填
     password: Joi.string().required().pattern(new RegExp('^\\w{5,15}$')), // 必填
   });
@@ -24,7 +24,7 @@ router.post("/login", (req, resp)=>{
   if (error) {
     resp.send(Response.error(400, error));
     return; // 结束
-  }
+  } */
   // 查询数据库，账号密码是否填写正确
   let sql = "select * from personage where username=? and password=MD5(?)"
   pool.query(sql, [username, password], (error, result)=>{
