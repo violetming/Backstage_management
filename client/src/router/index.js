@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -59,6 +60,22 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+// 全局的前置路由守卫
+router.beforeEach((to,from,next)=>{
+  console.log('from',from)
+  console.log('to:',to);
+  if(to.path=='/login'){
+    next()
+    return;
+  }
+  let user=store.state.user
+  if(user){
+    next()
+  }else{
+    router.push('/login')
+  }
+})
+
 
 
 

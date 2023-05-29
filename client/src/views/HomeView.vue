@@ -38,7 +38,7 @@
             </el-menu-item>
           </el-submenu>
 
-<!--           <el-submenu index="3">
+          <el-submenu index="3">
             <template slot="title">
               <i class="el-icon-location"></i>
               <span slot="title">企业管理</span>
@@ -55,28 +55,14 @@
               <i class="el-icon-plus"></i>
               <span slot="title">新增企业</span>
             </el-menu-item>
-          </el-submenu> -->
+          </el-submenu>
 
-<!-- 
-          <el-submenu index="4">
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span slot="title">电影院管理</span>
-            </template>
-            <el-menu-item index="/home/cinema-list">
-              <i class="el-icon-notebook-2"></i>
-              <span slot="title">电影院列表</span>
-            </el-menu-item>
-            <el-menu-item index="/home/cinema-add">
-              <i class="el-icon-plus"></i>
-              <span slot="title">新增电影院</span>
-            </el-menu-item>
-          </el-submenu> -->
 
         </el-menu>
       </el-aside>
       <el-container>
         <el-header class="header">
+          <!-- 面包屑导航 -->
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item 
             v-for="item in $route.meta.breadcrumbs" :key="item"
@@ -84,7 +70,14 @@
             {{item}}
             </el-breadcrumb-item>
           </el-breadcrumb>
-          <span>未登录</span>
+          <div>
+            <i class="el-icon-user-solid"></i>
+            <span>{{user.name}}</span> |
+            <span>{{user.username}}</span> |
+            <i class="el-icon-phone"></i>
+            <span>{{user.phone}}</span>
+          </div>
+
         </el-header>
         <el-main>
 
@@ -97,6 +90,7 @@
 </template>
 
 <script>
+import store from '@/store'
 export default {
   data() {
     return {
@@ -106,6 +100,11 @@ export default {
   methods: {
 
   },
+  computed:{
+    user(){
+      return store.state.user
+    }
+  }
 };
 </script>
 

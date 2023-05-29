@@ -1,9 +1,19 @@
 import axios from "axios"
 import qs from "qs" 
+import store from '@/store'
 // qs模块可以将对象转换为查询字符串
 
 // 创建Axios实例
 const instanche = axios.create()
+
+// 添加请求拦截器
+instanche.interceptors.request.use(function(config){
+    let token=store.state.token
+    if(token){
+        config.headers['Authorization']=token
+    }
+    return config
+})
 
 const myaxios = {
 
