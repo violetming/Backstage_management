@@ -16,6 +16,7 @@ const user=require('./router/Admin')
 const qualification=require('./router/Qualification')
 const enterprise=require('./router/Enterprise')
 const others=require('./router/Others')
+const verification=require('./router/verification.js')
 
 
 
@@ -40,10 +41,10 @@ const tokenTools = function (req, resp, next) {
   }
 
   // 测试环境中，不做token拦截，直接执行后续业务
-//  if(1==1){
-//    next();
-//    return;
-//  }
+ if(1==1){
+   next();
+   return;
+ }
 
 
   // 执行token验证
@@ -78,6 +79,6 @@ app.use('/user',user)
 app.use('/qualification',qualification)
 app.use('/enterprise',enterprise)
 app.use('/others',others)
-
+app.use('/verification',verification)
 
 

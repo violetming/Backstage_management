@@ -26,11 +26,22 @@
         type="password"
          placeholder='请输入管理员密码'></el-input>
       </el-form-item>
+      <el-form-item
+      prop='vercion'
+      >
+        <div class="validation">
+          <el-input 
+          v-model="form.vercion"
+          style="width:180px" placeholder='输入验证码'></el-input>
+          <div ref="qwe" style="width:100px;heidth:40px"></div>
+        </div>
+      </el-form-item>
       <el-form-item class="btn">
         <el-button type="primary" @click="onSubmit()" style="width:100px">登陆</el-button>
         <el-button type="primary" style="width:100px">注册</el-button>
       </el-form-item>
     </el-form>
+    {{cion}}
     </div>
   </div>
 </template>
@@ -43,8 +54,11 @@ import {KEYS,set} from '@/utils/Storage';
       return {
         form: {
           username:'',
-          password:''
+          password:'',
+          vercion:'',
         },
+        cion:0,
+        
         rules: {
         username: [
           { required: true, message: "请填写用户名", trigger: "blur" },
@@ -62,6 +76,14 @@ import {KEYS,set} from '@/utils/Storage';
             trigger: "blur",
           },
         ],
+        vercion:[
+          { required: true, message: "请填验证码", trigger: "blur" },
+          {
+            pattern: /^\w{6}$/,
+            message: "6位数字",
+            trigger: "blur",
+          },
+        ]
       },
       }
     },
@@ -93,8 +115,65 @@ import {KEYS,set} from '@/utils/Storage';
           })
         }
       })
+      },
+      verification(){
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const width = 100;
+        const height = 40;
+
+        // 设置 canvas 宽度和高度
+        canvas.width = width;
+        canvas.height = height;
+
+        // 随机背景填充色
+        ctx.fillStyle = `rgb(${getRandomColor()}, ${getRandomColor()}, ${getRandomColor()})`;
+        ctx.fillRect(0, 0, width, height);
+
+        // 绘制干扰线条
+        for(let i=0; i<8; i++) {
+          ctx.beginPath();
+          ctx.moveTo(Math.random()*width, Math.random()*height);
+          ctx.lineTo(Math.random()*width, Math.random()*height);
+          ctx.strokeStyle = `rgb(${getRandomColor()}, ${getRandomColor()}, ${getRandomColor()})`;
+          ctx.stroke();
+        }
+
+        // 生成随机数字
+        const captchaText = this.cion
+
+        // 在 canvas 上绘制文本
+        ctx.font = "bold 24px sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        for(let i=0; i<captchaText.length; i++) {
+          ctx.save();
+          ctx.fillStyle = `rgb(${getRandomColor()}, ${getRandomColor()}, ${getRandomColor()})`;
+          ctx.fillText(captchaText.charAt(i), 15+i*15, 20);
+          ctx.restore();
+        }
+
+        // 打包成图片
+        const captchaImg = new Image();
+        captchaImg.src = canvas.toDataURL();
+
+        // 将图片添加到 HTML 中
+        this.$refs.qwe.appendChild(captchaImg);
+
+        // 获取随机颜色
+        function getRandomColor() {
+          return Math.floor(Math.random() * 256);
+        }
       }
       
+    }, 
+    // 生命周期函数
+    async mounted(){
+      await httpApi.verificationApi.captcha().then(res=>{
+        console.log(res.data.code);
+        this.cion=res.data.code
+      })
+       this.verification()
     }
   }
 </script>
@@ -118,6 +197,10 @@ import {KEYS,set} from '@/utils/Storage';
   display: flex;
   justify-content: center;
   align-content: center;
+}
+.validation{
+display: flex;
+justify-content: space-between
 }
 }
 </style>
