@@ -58,6 +58,7 @@ import {KEYS,set} from '@/utils/Storage';
           password:'',
           vercion:'',
         },
+        judge:true,
         cion:0,
         
         rules: {
@@ -89,20 +90,23 @@ import {KEYS,set} from '@/utils/Storage';
       }
     },
     methods:{
+
       handleBlur(){
         let code=this.form.vercion
         httpApi.verificationApi.verify({code}).then(res=>{
-          console.log(res.status);
+          console.log(res.data.success);
+          this.judge= res.data.success
         })
       },
       onSubmit(){
+        console.log(this.judge);
         this.$refs['form'].validate((valid)=>{
           if(valid){
-        console.log(this.form.username);
         let params={
           username:this.form.username,
           password:this.form.password
         }
+      if(this.judge){
       httpApi.LoginApi.login(params).then(res=>{
         console.log(res);
         if(res.data.code==200){
@@ -124,6 +128,12 @@ import {KEYS,set} from '@/utils/Storage';
           })
         }
       })
+}else{
+            this.$message({
+            message:'验证码错误',
+            type:'error'
+          })
+}
           }
         })
       },

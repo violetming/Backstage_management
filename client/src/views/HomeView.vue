@@ -41,20 +41,17 @@
           <el-submenu index="3">
             <template slot="title">
               <i class="el-icon-location"></i>
-              <span slot="title">企业管理</span>
+              <span slot="title">职位管理</span>
             </template>
-            <el-menu-item index="/home/movie-list">
+            <el-menu-item index="/home/positionlist">
               <i class="el-icon-notebook-2"></i>
-              <span slot="title">企业列表</span>
+              <span slot="title">职位列表</span>
             </el-menu-item>
-            <el-menu-item index="/home/movie-add">
+            <el-menu-item index="/home/positionadd">
               <i class="el-icon-plus"></i>
-              <span slot="title">企业信息</span>
+              <span slot="title">发布职位</span>
             </el-menu-item>
-            <el-menu-item index="/home/movie-add">
-              <i class="el-icon-plus"></i>
-              <span slot="title">新增企业</span>
-            </el-menu-item>
+
           </el-submenu>
 
 

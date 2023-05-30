@@ -45,7 +45,26 @@ const routes = [
       meta:{
         breadcrumbs:['首页','人才管理','修改人才']
       }
-    }
+    },
+    // 职位管理
+    {
+      path:'positionlist',
+      name:'/home/positionlist',
+      component:()=>import('../views/Position/PositionList.vue'),
+      meta:{
+        breadcrumbs:['首页','职位管理','职位列表']
+      }
+    },
+    {
+      path:'positionadd',
+      name:'/home/positionadd',
+      component:()=>import('../views/Position/PositionAdd.vue'),
+      meta:{
+        breadcrumbs:['首页','职位管理','发布职位']
+      }
+    },
+
+    
   ]
   },
   {
