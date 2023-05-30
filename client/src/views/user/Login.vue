@@ -31,6 +31,7 @@
       >
         <div class="validation">
           <el-input 
+          @blur='handleBlur'
           v-model="form.vercion"
           style="width:180px" placeholder='输入验证码'></el-input>
           <div ref="qwe" style="width:100px;heidth:40px"></div>
@@ -88,7 +89,15 @@ import {KEYS,set} from '@/utils/Storage';
       }
     },
     methods:{
+      handleBlur(){
+        let code=this.form.vercion
+        httpApi.verificationApi.verify({code}).then(res=>{
+          console.log(res.status);
+        })
+      },
       onSubmit(){
+        this.$refs['form'].validate((valid)=>{
+          if(valid){
         console.log(this.form.username);
         let params={
           username:this.form.username,
@@ -115,6 +124,8 @@ import {KEYS,set} from '@/utils/Storage';
           })
         }
       })
+          }
+        })
       },
       verification(){
         const canvas = document.createElement('canvas');
@@ -170,7 +181,6 @@ import {KEYS,set} from '@/utils/Storage';
     // 生命周期函数
     async mounted(){
       await httpApi.verificationApi.captcha().then(res=>{
-        console.log(res.data.code);
         this.cion=res.data.code
       })
        this.verification()

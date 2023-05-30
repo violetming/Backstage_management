@@ -62,8 +62,6 @@ const router = new VueRouter({
 })
 // 全局的前置路由守卫
 router.beforeEach((to,from,next)=>{
-  console.log('from',from)
-  console.log('to:',to);
   if(to.path=='/login'){
     next()
     return;

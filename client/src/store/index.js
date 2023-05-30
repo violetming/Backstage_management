@@ -9,7 +9,7 @@ export default new Vuex.Store({
     token:get(KEYS.TOKEN)
   },
   getters: {
-  },
+  },  
   mutations: {
     updateUser(state,payload){
       state.user=payload
